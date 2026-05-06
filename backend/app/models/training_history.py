@@ -12,7 +12,7 @@ class TrainingHistory(Base):
     training_plan_id = Column(Integer, ForeignKey("training_plans.id"), nullable=True)
     date = Column(DateTime(timezone=True), server_default=func.now())
     notes = Column(String(500), nullable=True)
-    # Храним выполненные упражнения в формате JSON
+    # Przechowujemy wykonane ćwiczenia w formacie JSON
     # [{"exercise_id": 1, "name": "Отжимания", "sets": 3, "reps": 10, "weight": 0}]
     exercises_data = Column(JSON, nullable=False)
     duration_minutes = Column(Integer, default=0)
