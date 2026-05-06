@@ -18,7 +18,7 @@ def get_training_history(
     skip: int = 0,
     limit: int = 100
 ):
-    """Получить историю тренировок текущего пользователя"""
+    """Pobrać historię treningów aktualnego użytkownikaя"""
     history = db.query(TrainingHistory).filter(
         TrainingHistory.user_id == current_user.id
     ).order_by(TrainingHistory.date.desc()).offset(skip).limit(limit).all()
