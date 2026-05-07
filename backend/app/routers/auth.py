@@ -17,9 +17,9 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 def register(user_data: UserCreate, db: Session = Depends(get_db)):
-    """Регистрация нового пользователя"""
+    """Rejestracja nowego użytkownika"""
     try:
-        # Проверяем, существует ли пользователь с таким email
+        # Sprawdzamy, czy istnieje użytkownik z takim e-mailem
         existing_user = db.query(User).filter(User.email == user_data.email).first()
         if existing_user:
             raise HTTPException(
@@ -27,7 +27,7 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)):
                 detail="Email jest już zarejestrowany"
             )
         
-        # Создаём нового пользователя
+        # Tworzymy nowego użytkownika
         hashed_password = get_password_hash(user_data.password)
         new_user = User(
             name=user_data.name,
@@ -53,8 +53,8 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)):
 
 @router.post("/login", response_model=Token)
 def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    """Авторизация пользователя"""
-    # Ищем пользователя по email
+    """Autoryzacja użytkownika"""
+    #Szukamy użytkownika po e-mailu
     user = db.query(User).filter(User.email == form_data.username).first()
     
     if not user or not verify_password(form_data.password, user.hashed_password):
@@ -64,7 +64,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
             headers={"WWW-Authenticate": "Bearer"},
         )
     
-    # Создаём JWT токен
+    # Tworzymy token JWT
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
         data={"sub": user.email}, expires_delta=access_token_expires
@@ -75,5 +75,5 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
 
 @router.get("/me", response_model=UserResponse)
 def get_me(current_user: User = Depends(lambda token, db: __import__('app.services.auth', fromlist=['get_current_user']).get_current_user(token, db))):
-    """Получить информацию о текущем пользователе"""
+    """Pobrać informacje o aktualnym użytkowniku"""
     return current_user
