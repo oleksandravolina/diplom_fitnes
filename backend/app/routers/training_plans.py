@@ -16,7 +16,7 @@ def get_training_plans(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Получить все планы тренировок текущего пользователя"""
+    """Pobrać wszystkie plany treningowe aktualnego użytkownika"""
     plans = db.query(TrainingPlan).filter(TrainingPlan.user_id == current_user.id).all()
     return plans
 
@@ -27,7 +27,7 @@ def create_training_plan(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Создать новый план тренировок"""
+    """Utworzyć nowy plan treningowy"""
     new_plan = TrainingPlan(
         name=plan_data.name,
         description=plan_data.description,
@@ -48,7 +48,7 @@ def get_training_plan(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Получить план тренировок по ID"""
+    """Pobrać plan treningowy po ID"""
     plan = db.query(TrainingPlan).filter(
         TrainingPlan.id == plan_id,
         TrainingPlan.user_id == current_user.id
@@ -70,7 +70,7 @@ def update_training_plan(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Обновить план тренировок"""
+    """Zaktualizować plan treningowy"""
     plan = db.query(TrainingPlan).filter(
         TrainingPlan.id == plan_id,
         TrainingPlan.user_id == current_user.id
@@ -82,7 +82,7 @@ def update_training_plan(
             detail="Training plan not found"
         )
     
-    # Обновляем только переданные поля
+    # Aktualizujemy tylko przekazane pola
     update_data = plan_data.dict(exclude_unset=True)
     for field, value in update_data.items():
         setattr(plan, field, value)
@@ -99,7 +99,7 @@ def delete_training_plan(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Удалить план тренировок"""
+    """Usunąć plan treningowy"""
     plan = db.query(TrainingPlan).filter(
         TrainingPlan.id == plan_id,
         TrainingPlan.user_id == current_user.id
