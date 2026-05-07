@@ -11,7 +11,7 @@ router = APIRouter(prefix="/users", tags=["users"])
 
 @router.get("/me", response_model=UserResponse)
 def get_current_user_info(current_user: User = Depends(get_current_active_user)):
-    """Получить информацию о текущем пользователе"""
+    """Pobrać informacje o aktualnym użytkowniku"""
     return current_user
 
 
@@ -20,7 +20,7 @@ def delete_current_user(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Удалить аккаунт текущего пользователя"""
+    """Usunąć konto aktualnego użytkownika"""
     db.delete(current_user)
     db.commit()
     return None
