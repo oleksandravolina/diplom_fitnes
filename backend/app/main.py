@@ -7,12 +7,12 @@ from app.routers import auth, users, training_plans, exercises, training_history
 from app.services.auth import get_password_hash
 
 
-# Создаём таблицы и администратора при старте
+# Tworzymy tabele i administratora przy starcie
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     Base.metadata.create_all(bind=engine)
     
-    # Создаем администратора если его нет
+    # Tworzymy administratora, jeśli go nie ma
     db = SessionLocal()
     try:
         from app.models.user import User
@@ -34,12 +34,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Fitness Virtual Trainer API",
-    description="API для системы поддержки тренировок с виртуальным тренером",
+    description="API dla systemu wsparcia treningów z wirtualnym trenerem",
     version="1.0.0",
     lifespan=lifespan
 )
 
-# CORS middleware для работы с фронтендом
+# Middleware CORS do pracy z frontendem
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -53,7 +53,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Подключаем роутеры
+# Podłączamy routery
 app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(training_plans.router)
