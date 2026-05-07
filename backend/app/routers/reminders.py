@@ -18,7 +18,7 @@ def get_reminders(
     db: Session = Depends(get_db),
     active_only: bool = False
 ):
-    """Получить напоминания текущего пользователя"""
+    """Pobrać przypomnienia aktualnego użytkownika"""
     query = db.query(Reminder).filter(Reminder.user_id == current_user.id)
     
     if active_only:
@@ -33,7 +33,7 @@ def get_today_reminders(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Получить напоминания на сегодня"""
+    """Pobrać przypomnienia na dziś"""
     today = datetime.now().weekday()  # 0=Пн, 6=Вс
     
     reminders = db.query(Reminder).filter(
@@ -51,7 +51,7 @@ def create_reminder(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Создать напоминание"""
+    """Utworzyć przypomnienie"""
     new_reminder = Reminder(
         user_id=current_user.id,
         title=reminder_data.title,
@@ -74,7 +74,7 @@ def get_reminder(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Получить напоминание по ID"""
+    """Pobrać przypomnienie po ID"""
     reminder = db.query(Reminder).filter(
         Reminder.id == reminder_id,
         Reminder.user_id == current_user.id
@@ -124,7 +124,7 @@ def delete_reminder(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Удалить напоминание"""
+    """Usunąć przypomnienie"""
     reminder = db.query(Reminder).filter(
         Reminder.id == reminder_id,
         Reminder.user_id == current_user.id
