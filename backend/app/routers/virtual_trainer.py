@@ -16,7 +16,7 @@ def get_recommendation(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Получить рекомендацию от виртуального тренера"""
+    """Pobrać rekomendację od wirtualnego trenera"""
     return VirtualTrainerService.get_recommendation(current_user.id, db)
 
 
@@ -25,5 +25,5 @@ def get_progress(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ) -> Dict[str, Any]:
-    """Получить анализ прогресса"""
+    """Pobrać analizę postępów"""
     return VirtualTrainerService.analyze_progress(current_user.id, db)
