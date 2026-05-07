@@ -13,7 +13,7 @@ router = APIRouter(prefix="/training-plans/{plan_id}/exercises", tags=["exercise
 
 
 def check_plan_ownership(plan_id: int, user_id: int, db: Session):
-    """Проверить, принадлежит ли план пользователю"""
+    """Sprawdzić, czy plan należy do użytkownika"""
     plan = db.query(TrainingPlan).filter(
         TrainingPlan.id == plan_id,
         TrainingPlan.user_id == user_id
@@ -33,7 +33,7 @@ def get_exercises(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Получить все упражнения плана"""
+    """Pobrać wszystkie ćwiczenia planu"""
     check_plan_ownership(plan_id, current_user.id, db)
     
     exercises = db.query(Exercise).filter(Exercise.training_plan_id == plan_id).all()
@@ -47,7 +47,7 @@ def create_exercise(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Добавить упражнение в план"""
+    """Dodać ćwiczenie do planu"""
     check_plan_ownership(plan_id, current_user.id, db)
     
     new_exercise = Exercise(
@@ -74,7 +74,7 @@ def get_exercise(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Получить упражнение по ID"""
+    """Pobrać ćwiczenie po ID"""
     check_plan_ownership(plan_id, current_user.id, db)
     
     exercise = db.query(Exercise).filter(
@@ -99,7 +99,7 @@ def update_exercise(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Обновить упражнение"""
+    """Zaktualizować ćwiczenie"""
     check_plan_ownership(plan_id, current_user.id, db)
     
     exercise = db.query(Exercise).filter(
@@ -130,7 +130,7 @@ def delete_exercise(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Удалить упражнение"""
+    """Usunąć ćwiczenie"""
     check_plan_ownership(plan_id, current_user.id, db)
     
     exercise = db.query(Exercise).filter(
