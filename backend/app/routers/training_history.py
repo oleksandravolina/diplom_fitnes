@@ -32,7 +32,7 @@ def create_training_record(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Зафиксировать выполненную тренировку"""
+    """Zarejestrować wykonany trening"""
     new_record = TrainingHistory(
         user_id=current_user.id,
         training_plan_id=record_data.training_plan_id,
@@ -55,7 +55,7 @@ def get_training_record(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Получить запись о тренировке по ID"""
+    """Pobrać wpis o treningu po ID"""
     record = db.query(TrainingHistory).filter(
         TrainingHistory.id == record_id,
         TrainingHistory.user_id == current_user.id
@@ -77,7 +77,7 @@ def update_training_record(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Обновить запись о тренировке"""
+    """Zaktualizować wpis o treningu"""
     record = db.query(TrainingHistory).filter(
         TrainingHistory.id == record_id,
         TrainingHistory.user_id == current_user.id
@@ -112,7 +112,7 @@ def delete_training_record(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Удалить запись о тренировке"""
+    """Usunąć wpis o treningu"""
     record = db.query(TrainingHistory).filter(
         TrainingHistory.id == record_id,
         TrainingHistory.user_id == current_user.id
