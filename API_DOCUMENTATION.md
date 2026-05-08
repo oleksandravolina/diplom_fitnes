@@ -36,7 +36,7 @@ Authorization: Bearer <access_token>
 ### Auth
 
 #### POST /auth/register
-Регистрация нового пользователя
+Rejestracja nowego użytkownika
 
 **Request:**
 ```json
@@ -58,7 +58,7 @@ Authorization: Bearer <access_token>
 ```
 
 #### POST /auth/login
-Авторизация (OAuth2 формат)
+Autoryzacja (format OAuth2)
 
 **Response:**
 ```json
@@ -73,7 +73,7 @@ Authorization: Bearer <access_token>
 ### Users
 
 #### GET /users/me
-Получить информацию о текущем пользователе
+Pobrać informacje o aktualnym użytkowniku
 
 **Response:**
 ```json
@@ -86,60 +86,60 @@ Authorization: Bearer <access_token>
 ```
 
 #### DELETE /users/me
-Удалить аккаунт текущего пользователя
+Usunąć konto aktualnego użytkownika
 
 ---
 
 ### Training Plans
 
 #### GET /training-plans/
-Получить все планы текущего пользователя
+Pobrać wszystkie plany aktualnego użytkownika
 
 #### POST /training-plans/
-Создать новый план
+Utworzyć nowy plan
 
 **Request:**
 ```json
 {
-  "name": "Утренняя тренировка",
-  "description": "Тренировка на все группы мышц",
+  "name": "Poranny trening",
+  "description": "Trening na wszystkie grupy mięśni",
   "is_active": true
 }
 ```
 
 #### GET /training-plans/{plan_id}
-Получить план по ID
+Pobrać plan po ID
 
 #### PUT /training-plans/{plan_id}
-Обновить план
+Zaktualizować plan
 
 **Request:**
 ```json
 {
-  "name": "Обновленное название",
-  "description": "Новое описание",
+  "name": "Zaktualizowana nazwa",
+  "description": "Nowy opis",
   "is_active": false
 }
 ```
 
 #### DELETE /training-plans/{plan_id}
-Удалить план
+Usunąć plan
 
 ---
 
 ### Exercises
 
 #### GET /training-plans/{plan_id}/exercises/
-Получить все упражнения плана
+Pobrać wszystkie ćwiczenia planu
 
 #### POST /training-plans/{plan_id}/exercises/
-Добавить упражнение в план
+Dodać ćwiczenie do planu
 
 **Request:**
 ```json
 {
-  "name": "Отжимания",
-  "description": "Классические отжимания от пола",
+  "name": "Pompki",
+  "description": "Klasyczne pompki z podłogi",
   "sets": 3,
   "reps": 15,
   "weight": 0,
@@ -148,37 +148,37 @@ Authorization: Bearer <access_token>
 ```
 
 #### GET /training-plans/{plan_id}/exercises/{exercise_id}
-Получить упражнение по ID
+Pobrać ćwiczenie po ID
 
 #### PUT /training-plans/{plan_id}/exercises/{exercise_id}
-Обновить упражнение
+Zaktualizować ćwiczenie
 
 #### DELETE /training-plans/{plan_id}/exercises/{exercise_id}
-Удалить упражнение
+Usunąć ćwiczenie
 
 ---
 
 ### Training History
 
 #### GET /training-history/
-Получить историю тренировок
+Pobrać historię treningów
 
 **Query Parameters:**
-- `skip` - пропустить N записей
-- `limit` - лимит записей (default: 100)
+- `skip` - pominąć N rekordów
+- `limit` - limit rekordów (domyślnie: 100)
 
 #### POST /training-history/
-Записать выполненную тренировку
+Zapisać wykonany trening
 
 **Request:**
 ```json
 {
   "training_plan_id": 1,
-  "notes": "Хорошая тренировка",
+  "notes": "Dobry trening",
   "exercises_data": [
     {
       "exercise_id": 1,
-      "name": "Отжимания",
+      "name": "Pompki",
       "sets": 3,
       "reps": 15,
       "weight": 0
@@ -190,44 +190,44 @@ Authorization: Bearer <access_token>
 ```
 
 #### GET /training-history/{record_id}
-Получить запись о тренировке
+Pobrać wpis o treningu
 
 #### PUT /training-history/{record_id}
-Обновить запись о тренировке
+Zaktualizować wpis o treningu
 
 **Request:**
 ```json
 {
-  "notes": "Обновленные заметки",
+  "notes": "Zaktualizowane notatki",
   "duration_minutes": 50,
   "calories_burned": 350
 }
 ```
 
 #### DELETE /training-history/{record_id}
-Удалить запись
+Usunąć wpis
 
 ---
 
 ### Reminders
 
 #### GET /reminders/
-Получить все напоминания
+Pobrać wszystkie przypomnienia
 
 **Query Parameters:**
-- `active_only` - только активные (true/false)
+- `active_only` - tylko aktywne (true/false)
 
 #### GET /reminders/today
-Получить напоминания на сегодня
+Pobrać przypomnienia na dziś
 
 #### POST /reminders/
-Создать напоминание
+Utworzyć przypomnienie
 
 **Request:**
 ```json
 {
-  "title": "Утренняя тренировка",
-  "message": "Не забудь размяться!",
+  "title": "Poranny trening",
+  "message": "Nie zapomnij się rozgrzać!",
   "day_of_week": 1,
   "reminder_time": "07:00:00",
   "is_active": true
@@ -235,21 +235,21 @@ Authorization: Bearer <access_token>
 ```
 
 #### PUT /reminders/{reminder_id}
-Обновить напоминание
+Zaktualizować przypomnienie
 
 #### DELETE /reminders/{reminder_id}
-Удалить напоминание
+Usunąć przypomnienie
 
 ---
 
 ### Exercise Catalog
 
 #### GET /exercise-catalog/
-Получить каталог упражнений
+Pobrać katalog ćwiczeń
 
 **Query Parameters:**
-- `category` - фильтр по категории (np. `klatka_piersiowa`, `nogi`, `plecy`)
-- `difficulty` - фильтр по сложности (`łatwy`, `średni`, `trudny`)
+- `category` - filtr według kategorii (np. `klatka_piersiowa`, `nogi`, `plecy`)
+- `difficulty` - filtr według poziomu trudności (`łatwy`, `średni`, `trudny`)
 - `search` - поиск по названию
 
 **Response:**
@@ -267,7 +267,7 @@ Authorization: Bearer <access_token>
 ```
 
 #### GET /exercise-catalog/categories
-Получить список категорий
+Pobrać listę kategorii
 
 **Response:**
 ```json
@@ -275,10 +275,10 @@ Authorization: Bearer <access_token>
 ```
 
 #### GET /exercise-catalog/{exercise_id}
-Получить упражнение из каталога по ID
+Pobrać ćwiczenie z katalogu po ID
 
 #### POST /exercise-catalog/
-Добавить упражнение в каталог (только admin)
+Dodać ćwiczenie do katalogu (tylko admin)
 
 **Request:**
 ```json
@@ -292,38 +292,38 @@ Authorization: Bearer <access_token>
 ```
 
 #### PUT /exercise-catalog/{exercise_id}
-Обновить упражнение в каталоге
+Zaktualizować ćwiczenie w katalogu
 
 #### DELETE /exercise-catalog/{exercise_id}
-Удалить упражнение из каталога
+Usunąć ćwiczenie z katalogu
 
 ---
 
 ### Virtual Trainer
 
 #### GET /virtual-trainer/recommendation
-Получить рекомендацию от виртуального тренера
+Pobrać rekomendację od wirtualnego trenera
 
 **Response:**
 ```json
 {
-  "message": "Ты отдыхал 3 дня - время вернуться! Начни с лёгкой тренировки.",
-  "motivation": "Отдых - часть тренировки. Сегодня возвращаемся в форму плавно!",
+  "message": "Odpoczywałeś 3 dni — czas wrócić! Zacznij od lekkiego treningu.",
+  "motivation": "Odpoczynek to część treningu. Dziś wracamy do formy stopniowo!",
   "suggested_exercises": [
     {
-      "name": "Разминка (5 мин)",
+      "name": "Rozgrzewka (5 min)",
       "sets": 1,
       "reps": 1,
       "weight": 0
     }
   ],
   "workout_type": "light",
-  "reason": "Небольшой перерыв - лёгкая тренировка для возвращения"
+  "reason": "Krótka przerwa — lekki trening na powrót"
 }
 ```
 
 #### GET /virtual-trainer/progress
-Получить анализ прогресса
+Pobrać analizę postępów
 
 **Response:**
 ```json
@@ -337,9 +337,9 @@ Authorization: Bearer <access_token>
 
 ---
 
-## Коды ошибок
+## Kody błędów
 
-| Код | Описание |
+| Kod | Opis |
 |-----|----------|
 | 200 | OK |
 | 201 | Created |
@@ -351,9 +351,9 @@ Authorization: Bearer <access_token>
 
 ---
 
-## Примеры использования в Postman
+## Przykłady użycia w Postman
 
-### 1. Регистрация
+### 1. Rejestracja
 ```
 POST http://localhost:8000/auth/register
 Content-Type: application/json
@@ -365,7 +365,7 @@ Content-Type: application/json
 }
 ```
 
-### 2. Авторизация
+### 2. Autoryzacja
 ```
 POST http://localhost:8000/auth/login
 Content-Type: application/x-www-form-urlencoded
@@ -373,19 +373,19 @@ Content-Type: application/x-www-form-urlencoded
 username=test@example.com&password=password123
 ```
 
-### 3. Создание плана (с токеном)
+### 3. Tworzenie planu (z tokenem)
 ```
 POST http://localhost:8000/training-plans/
 Authorization: Bearer <token>
 Content-Type: application/json
 
 {
-  "name": "Моя тренировка",
-  "description": "Описание"
+  "name": "Mój trening",
+  "description": "Opis"
 }
 ```
 
-### 4. Добавление упражнения из каталога в план
+### 4. Dodanie ćwiczenia z katalogu do planu
 ```
 POST http://localhost:8000/training-plans/1/exercises/
 Authorization: Bearer <token>
