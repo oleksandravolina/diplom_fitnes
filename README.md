@@ -1,8 +1,8 @@
 # Fitness Virtual Trainer
 
-Система поддержки тренировок с виртуальным тренером.
+System wsparcia treningów z wirtualnym trenerem.
 
-## Архитектура
+## Architektura
 
 ```
 ├── backend/           # FastAPI backend
@@ -10,7 +10,7 @@
 │   │   ├── models/    # SQLAlchemy модели
 │   │   ├── schemas/   # Pydantic схемы
 │   │   ├── routers/   # API endpoints
-│   │   ├── services/  # Бизнес-логика
+│   │   ├── services/  # Logika biznesowa
 │   │   ├── database.py
 │   │   └── main.py
 │   ├── requirements.txt
@@ -27,31 +27,31 @@
 │   ├── package.json
 │   └── index.html
 │
-├── DATABASE_SCHEMA.md # Документация БД
-└── API_DOCUMENTATION.md # Документация API
+├── DATABASE_SCHEMA.md # Dokumentacja BD
+└── API_DOCUMENTATION.md # Dokumentacja API
 ```
 
-## Быстрый старт
+## Szybki start
 
-### Первое развёртывание
+### Pierwsze wdrożenie
 
 #### Backend
 
 ```bash
 cd backend
 
-# Создать виртуальное окружение
+# Utworzyć środowisko wirtualne
 python -m venv .venv
 
-# Активировать виртуальное окружение
+# Aktywować środowisko wirtualne
 source .venv/bin/activate  # Linux/Mac
-# или
+# albo
 .venv\Scripts\activate  # Windows
 
-# Установить зависимости
+# Zainstalować zależności
 pip install -r requirements.txt
 
-# Запустить сервер
+# Uruchomić serwer
 uvicorn app.main:app --reload --port 8000
 ```
 
@@ -60,21 +60,21 @@ uvicorn app.main:app --reload --port 8000
 ```bash
 cd frontend
 
-# Установить зависимости
+# Zainstalować zależności
 npm install
 
-# Запустить dev сервер
+# Uruchomić serwer developerski
 npm run dev
 ```
 
 ---
 
-### Повторный запуск
+### Ponowne uruchomienie
 
 #### Backend
 
 ```bash
-# Из корня проекта:
+# Z głównego katalogu projektu:
 source .venv/bin/activate
 cd backend
 uvicorn app.main:app --reload --port 8000
@@ -89,55 +89,55 @@ npm run dev
 
 ---
 
-**Доступ:**
+**Dostęp:**
 - API: http://localhost:8000
 - Frontend: http://localhost:3000
-- Swagger документация: http://localhost:8000/docs
+- Swagger dokumentacja: http://localhost:8000/docs
 
-## Функциональность
+## Funkcjonalność
 
-### Управление пользователями
-- Регистрация и авторизация (JWT)
-- Хранение профиля
+### Zarządzanie użytkownikami
+Rejestracja i autoryzacja (JWT)
+Przechowywanie profilu
 
-### Управление планами тренировок
-- Создание и редактирование планов
-- Добавление упражнений в план из каталога
-- Привязка планов к пользователю
+### Zarządzanie planami treningowymi
+Tworzenie i edycja planów
+Dodawanie ćwiczeń do planu z katalogu
+Przypisywanie planów do użytkownika
 
-### Каталог упражнений
-- 37 предопределенных упражнений
-- 9 категорий: клетка грудная, ноги, спина, пресс, плечи, бицепс, трицепс, кардио, разминка
-- 3 уровня сложности: легкий, средний, сложный
-- Фильтрация по категории, сложности, названию
+### Katalog ćwiczeń
+37 predefiniowanych ćwiczeń
+9 kategorii: klatka piersiowa, nogi, plecy, brzuch, barki, biceps, triceps, cardio, rozgrzewka
+3 poziomy trudności: łatwy, średni, trudny
+Filtrowanie według kategorii, poziomu trudności, nazwy
 
-### История тренировок
-- Фиксация выполненных тренировок
-- Просмотр истории с деталями
-- Редактирование записей (длительность, калории, заметки)
+### Historia treningów
+Rejestrowanie wykonanych treningów
+Przeglądanie historii ze szczegółami
+Edycja wpisów (czas trwania, kalorie, notatki)
 
-### Напоминания
-- Создание расписания тренировок
-- Напоминания по дням недели
-- Отображение сегодняшних напоминаний
+### Przypomnienia
+Tworzenie harmonogramu treningów
+Przypomnienia według dni tygodnia
+Wyświetlanie dzisiejszych przypomnień
 
-### Виртуальный тренер
-- Анализ истории тренировок
-- Персонализированные рекомендации
-- Мотивационные сообщения
-- Определение типа тренировки (лёгкая/средняя/интенсивная) на основе:
-  - Дней с последней тренировки
-  - Количества тренировок за неделю
+### Wirtualny trener
+Analiza historii treningów
+Spersonalizowane rekomendacje
+Wiadomości motywacyjne
+Określanie typu treningu (lekki/średni/intensywny) na podstawie:
+Liczby dni od ostatniego treningu
+Liczby treningów w tygodniu
 
-## Технологии
+## Technologie
 
 **Backend:**
 - Python 3.10+
 - FastAPI
 - SQLAlchemy
-- SQLite (можно заменить на PostgreSQL)
-- JWT аутентификация
-- bcrypt для хеширования паролей
+- SQLite
+- JWT uwierzytelnianie
+- bcrypt do hashowania haseł
 
 **Frontend:**
 - React 18
@@ -145,40 +145,40 @@ npm run dev
 - Material-UI (MUI)
 - React Query
 - React Router
-- date-fns (с польской локализацией)
+- date-fns (z polską lokalizacją)
 - Vite
 
-## Интерфейс
+## Interfejs
 
-- **Язык:** Польский (весь UI, API сообщения, виртуальный тренер)
-- **Дизайн:** Современный с градиентами
-- **Адаптивность:** Поддержка мобильных устройств
-- **Особенности:**
-  - Размытый верхний бар (backdrop blur)
-  - Карточный интерфейс
-  - Адаптивные таблицы (карточки на мобильных)
+**Język**: Polski (cały interfejs UI, komunikaty API, wirtualny trener)
+**Design**: Nowoczesny z gradientami
+**Responsywność**: Obsługa urządzeń mobilnych
+**Cechy**:
+Rozmyty górny pasek (backdrop blur)
+Interfejs oparty na kartach
+Responsywne tabele (karty na urządzeniach mobilnych)
 
-## Тестирование в Postman
+## Testowanie w Postman
 
-1. Импортируйте коллекцию из `API_DOCUMENTATION.md`
-2. Создайте Environment с переменной `base_url` = `http://localhost:8000`
-3. Зарегистрируйтесь через `POST /auth/register`
-4. Авторизуйтесь через `POST /auth/login`
-5. Сохраните полученный токен в переменную `token`
-6. Используйте токен в заголовке Authorization: Bearer {{token}}
+Zaimportuj kolekcję z API_DOCUMENTATION.md
+Utwórz Environment ze zmienną base_url = http://localhost:8000
+Zarejestruj się przez POST /auth/register
+Zautoryzuj się przez POST /auth/login
+Zapisz otrzymany token do zmiennej token
+Używaj tokenu w nagłówku Authorization: Bearer {{token}}
 
-## Структура базы данных
+## Struktura bazy danych
 
-См. [DATABASE_SCHEMA.md](DATABASE_SCHEMA.md)
+ [DATABASE_SCHEMA.md](DATABASE_SCHEMA.md)
 
 ## API Endpoints
 
-См. [API_DOCUMENTATION.md](API_DOCUMENTATION.md)
+С [API_DOCUMENTATION.md](API_DOCUMENTATION.md)
 
-## Начальные данные
+## Dane początkowe
 
-При первом запуске создается пользователь-администратор:
+Przy pierwszym uruchomieniu tworzony jest użytkownik-administrator:
 - Email: admin@fittrainer.pl
 - Password: admin123
 
-Администратор может добавлять упражнения в каталог через API или скрипт `backend/seed_exercises.py`.
+Administrator może dodawać ćwiczenia do katalogu przez API lub skrypt `backend/seed_exercises.py`.
