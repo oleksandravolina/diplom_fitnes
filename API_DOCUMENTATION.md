@@ -1,20 +1,20 @@
 # API Documentation
 
-## Базовый URL
+## Bazowy URL
 ```
 http://localhost:8000
 ```
 
-## Документация Swagger
+## Dokumentacja Swagger
 ```
 http://localhost:8000/docs
 ```
 
 ---
 
-## Аутентификация
+## Uwierzytelnianie
 
-API использует JWT токены для аутентификации.
+API używa tokenów JWT do uwierzytelniania.
 
 ### Получение токена
 ```
