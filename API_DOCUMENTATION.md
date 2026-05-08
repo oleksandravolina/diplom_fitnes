@@ -250,7 +250,7 @@ Pobrać katalog ćwiczeń
 **Query Parameters:**
 - `category` - filtr według kategorii (np. `klatka_piersiowa`, `nogi`, `plecy`)
 - `difficulty` - filtr według poziomu trudności (`łatwy`, `średni`, `trudny`)
-- `search` - поиск по названию
+- `search` - wyszukiwanie po nazwie
 
 **Response:**
 ```json
