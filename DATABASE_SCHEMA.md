@@ -1,96 +1,96 @@
-# Структура базы данных
+# Struktura bazy danych
 
-## Обзор
+## Przegląd
 
-База данных системы поддержки тренировок с виртуальным тренером использует реляционную модель на основе SQLAlchemy ORM.
+Baza danych systemu wsparcia treningów z wirtualnym trenerem wykorzystuje model relacyjny oparty na SQLAlchemy ORM
 
-## Таблицы
+## Tabele
 
-### 1. Users (Пользователи)
+### 1. Users (Użytkownicy)
 
-Хранит информацию о зарегистрированных пользователях.
+Przechowuje informacje o zarejestrowanych użytkownikach.
 
-| Поле | Тип | Описание |
+| Pole | Typ | Opis |
 |------|-----|----------|
-| id | Integer (PK) | Уникальный идентификатор |
-| name | String(100) | Имя пользователя |
-| email | String(100), Unique | Email адрес |
-| hashed_password | String(255) | Хешированный пароль (bcrypt) |
-| created_at | DateTime | Дата создания |
-| updated_at | DateTime | Дата последнего обновления |
+| id | Integer (PK) | Unikalny identyfikator |
+| name | String(100) | Imię użytkownika |
+| email | String(100), Unique | Email  |
+| hashed_password | String(255) | Zahaszowane hasło (bcrypt) |
+| created_at | DateTime | Data utworzenia |
+| updated_at | DateTime | Data ostatniej aktualizacji |
 
-**Связи:**
+**Relacje:**
 - `training_plans` → One-to-Many → TrainingPlans
 - `training_history` → One-to-Many → TrainingHistory
 - `reminders` → One-to-Many → Reminders
 
 ---
 
-### 2. TrainingPlans (Планы тренировок)
+### 2. TrainingPlans (Data ostatniej aktualizacji)
 
-Хранит планы тренировок пользователей.
+Przechowuje plany treningowe użytkowników.
 
-| Поле | Тип | Описание |
+| Pole | Typ | Opis |
 |------|-----|----------|
-| id | Integer (PK) | Уникальный идентификатор |
-| name | String(100) | Название плана |
-| description | String(500) | Описание плана |
-| user_id | Integer (FK) | ID пользователя-владельца |
-| is_active | Boolean | Активен ли план |
-| created_at | DateTime | Дата создания |
-| updated_at | DateTime | Дата обновления |
+| id | Integer (PK) | Unikalny identyfikator |
+| name | String(100) | Nazwa planu |
+| description | String(500) | Opis planu |
+| user_id | Integer (FK) | ID użytkownika-właściciela |
+| is_active | Boolean | Czy plan jest aktywny |
+| created_at | DateTime | Data utworzenia |
+| updated_at | DateTime | Data aktualizacji |
 
-**Связи:**
+**Relacje:**
 - `user` → Many-to-One → Users
 - `exercises` → One-to-Many → Exercises
 
 ---
 
-### 3. Exercises (Упражнения)
+### 3. Exercises (Ćwiczenia)
 
-Хранит упражнения, входящие в планы тренировок.
+Przechowuje ćwiczenia wchodzące w skład planów treningowych.
 
-| Поле | Тип | Описание |
+| Pole | Typ | Opis |
 |------|-----|----------|
-| id | Integer (PK) | Уникальный идентификатор |
-| name | String(100) | Название упражнения |
-| description | String(500) | Описание техники |
-| sets | Integer | Количество подходов |
-| reps | Integer | Количество повторений |
-| weight | Integer | Вес в кг (0 = вес тела) |
-| rest_seconds | Integer | Отдых между подходами в секундах |
-| training_plan_id | Integer (FK) | ID плана тренировок |
-| created_at | DateTime | Дата создания |
+| id | Integer (PK) | Unikalny identyfikator |
+| name | String(100) | Nazwa ćwiczenia |
+| description | String(500) | Opis techniki |
+| sets | Integer | Liczba serii |
+| reps | Integer | Liczba powtórzeń |
+| weight | Integer | Waga w kg (0 = masa ciała) |
+| rest_seconds | Integer | Odpoczynek między seriami w sekundach |
+| training_plan_id | Integer (FK) | ID planu treningowego |
+| created_at | DateTime | Data utworzenia |
 
-**Связи:**
+**Relacje:**
 - `training_plan` → Many-to-One → TrainingPlans
 
 ---
 
-### 4. TrainingHistory (История тренировок)
+### 4. TrainingHistory (Historia treningów)
 
-Хранит записи о выполненных тренировках.
+Przechowuje wpisy o wykonanych treningach.
 
-| Поле | Тип | Описание |
+| Pole | Typ | Opis |
 |------|-----|----------|
-| id | Integer (PK) | Уникальный идентификатор |
-| user_id | Integer (FK) | ID пользователя |
-| training_plan_id | Integer (FK, nullable) | ID плана (может быть null) |
-| date | DateTime | Дата и время тренировки |
-| notes | String(500) | Заметки о тренировке |
-| exercises_data | JSON | Данные о выполненных упражнениях |
-| duration_minutes | Integer | Длительность в минутах |
-| calories_burned | Integer | Сожжено калорий |
+| id | Integer (PK) | Unikalny identyfikator |
+| user_id | Integer (FK) | ID użytkownika |
+| training_plan_id | Integer (FK, nullable) | ID planu (może być null) |
+| date | DateTime | Data i godzina treningu |
+| notes | String(500) | Notatki o treningu |
+| exercises_data | JSON | Dane o wykonanych ćwiczeniach |
+| duration_minutes | Integer | Czas trwania w minutach |
+| calories_burned | Integer | Spalone kalorie |
 
-**Связи:**
+**Relacje:**
 - `user` → Many-to-One → Users
 
-**Формат exercises_data:**
+**Format exercises_data:**
 ```json
 [
   {
     "exercise_id": 1,
-    "name": "Отжимания",
+    "name": "Pompki",
     "sets": 3,
     "reps": 10,
     "weight": 0
@@ -100,54 +100,54 @@
 
 ---
 
-### 5. Reminders (Напоминания)
+### 5. Reminders (Przypomnienia)
 
-Хранит расписание напоминаний о тренировках.
+Przechowuje harmonogram przypomnień o treningach.
 
-| Поле | Тип | Описание |
+| Pole | Typ | Opis |
 |------|-----|----------|
-| id | Integer (PK) | Уникальный идентификатор |
-| user_id | Integer (FK) | ID пользователя |
-| title | String(100) | Заголовок напоминания |
-| message | String(500) | Текст сообщения |
-| day_of_week | Integer | День недели (0=Пн, 6=Вс) |
-| reminder_time | Time | Время напоминания |
-| is_active | Boolean | Активно ли напоминание |
-| created_at | DateTime | Дата создания |
+| id | Integer (PK) | Unikalny identyfikator |
+| user_id | Integer (FK) | ID użytkownika |
+| title | String(100) | Tytuł przypomnienia |
+| message | String(500) | Tytuł przypomnienia |
+| day_of_week | Integer | Dzień tygodnia (0=Pon, 6=Nd) |
+| reminder_time | Time | Godzina przypomnienia |
+| is_active | Boolean | Czy przypomnienie jest aktywne |
+| created_at | DateTime | Data utworzenia |
 
-**Связи:**
+**Relacje:**
 - `user` → Many-to-One → Users
 
 ---
 
-### 6. ExerciseCatalog (Каталог упражнений)
+### 6. ExerciseCatalog (Katalog ćwiczeń)
 
-Хранит предопределенные упражнения, доступные для добавления в планы.
+Przechowuje predefiniowane ćwiczenia dostępne do dodania do planów.
 
-| Поле | Тип | Описание |
+| Pole | Typ | Opis |
 |------|-----|----------|
-| id | Integer (PK) | Уникальный идентификатор |
-| name | String(100) | Название упражнения |
-| description | String(500) | Описание техники |
-| category | String(50) | Категория (klatka_piersiowa, nogi, plecy, brzuch, ramiona, biceps, triceps, kardio, rozgrzewka) |
-| difficulty | String(20) | Сложность (łatwy, średni, trudny) |
-| equipment | String(100) | Необходимое оборудование |
-| created_at | DateTime | Дата создания |
+| id | Integer (PK) | Unikalny identyfikator |
+| name | String(100) | Nazwa ćwiczenia |
+| description | String(500) | Opis techniki |
+| category | String(50) | Kategoria (klatka_piersiowa, nogi, plecy, brzuch, ramiona, biceps, triceps, kardio, rozgrzewka) |
+| difficulty | String(20) | Poziom trudności (łatwy, średni, trudny) |
+| equipment | String(100) | Wymagany sprzęt |
+| created_at | DateTime | Data utworzenia |
 
-**Категории:**
-- `klatka_piersiowa` - Клетка грудная
-- `nogi` - Ноги
-- `plecy` - Спина
-- `brzuch` - Пресс
-- `ramiona` - Плечи
-- `biceps` - Бицепс
-- `triceps` - Трицепс
-- `kardio` - Кардио
-- `rozgrzewka` - Разминка
+**Kategorie:**
+- `klatka_piersiowa` - Klatka piersiowa
+- `nogi` - Nogi
+- `plecy` - Plecy
+- `brzuch` - Brzuch
+- `ramiona` - Barki
+- `biceps` - Biceps
+- `triceps` - Triceps
+- `kardio` - Cardio
+- `rozgrzewka` - Rozgrzewka
 
 ---
 
-## Диаграмма связей
+## Diagram relacji
 
 ```
 ┌─────────────┐       ┌──────────────────┐       ┌─────────────┐
@@ -196,38 +196,38 @@
 
 ---
 
-## Индексы
+## Indeksy
 
-- `users.email` - уникальный индекс для быстрого поиска при авторизации
-- `training_plans.user_id` - индекс для фильтрации планов пользователя
-- `training_history.user_id` + `date` - составной индекс для быстрого получения истории
-- `reminders.user_id` + `day_of_week` - индекс для получения напоминаний на день
-- `exercise_catalog.category` - индекс для фильтрации по категории
-- `exercise_catalog.difficulty` - индекс для фильтрации по сложности
+- `users.email` - unikalny indeks do szybkiego wyszukiwania przy autoryzacji
+- `training_plans.user_id` - indeks do filtrowania planów użytkownika
+- `training_history.user_id` + `date` - indeks złożony do szybkiego pobierania historii
+- `reminders.user_id` + `day_of_week` - indeks do pobierania przypomnień na dany dzień
+- `exercise_catalog.category` - indeks do filtrowania według kategorii
+- `exercise_catalog.difficulty` - indeks do filtrowania według poziomu trudności
 
 ---
 
-## Миграции
+## Migracje
 
-Для управления миграциями используется Alembic. Основные команды:
+Do zarządzania migracjami używany jest Alembic. Główne komendy:
 
 ```bash
-# Создать миграцию
+# Utworzyć migrację
 alembic revision --autogenerate -m "description"
 
-# Применить миграции
+# Zastosować migracje
 alembic upgrade head
 
-# Откатить последнюю миграцию
+# Cofnąć ostatnią migrację
 alembic downgrade -1
 ```
 
 ---
 
-## Начальные данные
+## Dane początkowe
 
-При первом запуске создается пользователь-администратор:
+Przy pierwszym uruchomieniu tworzony jest użytkownik-administrator:
 - Email: admin@fittrainer.pl
 - Password: admin123
 
-Администратор может добавлять упражнения в каталог через API.
+Administrator może dodawać ćwiczenia do katalogu przez API.
