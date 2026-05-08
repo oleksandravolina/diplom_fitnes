@@ -96,7 +96,7 @@ def update_reminder(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Обновить напоминание"""
+    """Zaktualizować przypomnienie"""
     reminder = db.query(Reminder).filter(
         Reminder.id == reminder_id,
         Reminder.user_id == current_user.id
