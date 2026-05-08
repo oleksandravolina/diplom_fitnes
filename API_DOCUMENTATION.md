@@ -16,7 +16,7 @@ http://localhost:8000/docs
 
 API używa tokenów JWT do uwierzytelniania.
 
-### Получение токена
+### Pobranie tokenu
 ```
 POST /auth/login
 Content-Type: application/x-www-form-urlencoded
@@ -24,7 +24,7 @@ Content-Type: application/x-www-form-urlencoded
 username=email@example.com&password=password
 ```
 
-### Использование токена
+### Użycie tokenu
 ```
 Authorization: Bearer <access_token>
 ```
